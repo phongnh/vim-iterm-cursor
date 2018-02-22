@@ -5,7 +5,15 @@ endif
 let g:loaded_iterm_cursor = 1
 
 if has('nvim')
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+    if !has('nvim-0.2.0')
+        let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+    else
+        " enable non-blinking mode-sensitive cursor
+        " set guicursor=n-v-c:block-blinkon0,i-ci-ve:ver25-blinkon0,r-cr:hor20,o:hor50
+
+        " enable blinking mode-sensitive cursor
+        set guicursor=n-v-c:block-blinkon10,i-ci-ve:ver25-blinkon10,r-cr:hor20,o:hor50
+    endif
 elseif has('cursorshape') && !has('gui_running')
     if $TERM_PROGRAM ==# 'iTerm.app'
         " Different cursors for Insert Mode vs Normal Mode for iTerm
